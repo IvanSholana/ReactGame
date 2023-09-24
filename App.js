@@ -12,6 +12,7 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+
   return (
     <LinearGradient
       colors={[Colors["burnt-sienna"], Colors["warm-yellow"]]}
@@ -22,7 +23,6 @@ export default function App() {
         style={{ flex: 1 }}
         source={require("./assets/background.png")}
       >
-        {/* Komponen ImageBackground hanya digunakan untuk latar belakang */}
         <View style={styles.container}>
           <StartGameScreen />
           <StatusBar style="auto" />

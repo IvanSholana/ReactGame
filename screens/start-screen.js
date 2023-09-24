@@ -1,15 +1,44 @@
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import ButtonContainer from "../components/primary-button";
 import Colors from "../utility/colors";
+import { useState } from "react";
 
-export default function StartGameScreen() {
+export default function StartGameScreen({ handlerInputNumber, enteredNumber }) {
+  const [enterdNumber, setEnteredNumber] = useState();
+
+  function enterdNumberHandler(inputNumber) {
+    setEnteredNumber(inputNumber);
+  }
+
+  const validationNumber = () => {
+    const number = parseInt(enterdNumber);
+
+    if (!isNaN(number) && number > 0 && number <= 99) {
+      setEnteredNumber(number);
+    } else {
+      Alert.alert("INVALID INPUT", "Please Insert Valid Input", [
+        { text: "Exit", style: "destructive", onPress: resetNumber() },
+      ]);
+    }
+  };
+
+  function resetNumber() {
+    setEnteredNumber();
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>ENTER YOUR NUMBER</Text>
-      <TextInput style={styles.texInput}></TextInput>
+      <TextInput
+        style={styles.texInput}
+        onChangeText={enterdNumberHandler}
+        value={enterdNumber}
+        maxLength={2}
+      ></TextInput>
+
       <View style={styles.buttonContainer}>
-        <ButtonContainer>START</ButtonContainer>
-        <ButtonContainer>END</ButtonContainer>
+        <ButtonContainer onPress={validationNumber}>START</ButtonContainer>
+        <ButtonContainer onPress={resetNumber}>RESET</ButtonContainer>
       </View>
     </View>
   );
