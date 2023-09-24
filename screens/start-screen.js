@@ -3,7 +3,7 @@ import ButtonContainer from "../components/primary-button";
 import Colors from "../utility/colors";
 import { useState } from "react";
 
-export default function StartGameScreen({ handlerInputNumber, enteredNumber }) {
+export default function StartGameScreen({ startGame, getUserNumber }) {
   const [enterdNumber, setEnteredNumber] = useState();
 
   function enterdNumberHandler(inputNumber) {
@@ -15,6 +15,8 @@ export default function StartGameScreen({ handlerInputNumber, enteredNumber }) {
 
     if (!isNaN(number) && number > 0 && number <= 99) {
       setEnteredNumber(number);
+      getUserNumber(number);
+      startGame(true);
     } else {
       Alert.alert("INVALID INPUT", "Please Insert Valid Input", [
         { text: "Exit", style: "destructive", onPress: resetNumber() },

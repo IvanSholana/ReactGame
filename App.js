@@ -3,8 +3,12 @@ import StartGameScreen from "./screens/start-screen";
 import { LinearGradient } from "expo-linear-gradient";
 import Colors from "./utility/colors";
 import { useFonts } from "expo-font";
+import GameScreen from "./screens/game-screen";
+import { useState } from "react";
 
 export default function App() {
+  const [isGameStarted, setGameStart] = useState(false);
+  const [userNumber, setUserNumber] = useState();
   const [fontsLoaded] = useFonts({
     "Poppins-SemiBold": require("./assets/font/Poppins/Poppins-SemiBold.ttf"),
     "Poppins-Medium": require("./assets/font/Poppins/Poppins-Medium.ttf"),
@@ -12,6 +16,15 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+
+  let activeScreen = isGameStarted ? (
+    <GameScreen userNumber={userNumber}></GameScreen>
+  ) : (
+    <StartGameScreen
+      startGame={setGameStart}
+      getUserNumber={setUserNumber}
+    ></StartGameScreen>
+  );
 
   return (
     <LinearGradient
@@ -24,12 +37,10 @@ export default function App() {
         source={require("./assets/background.png")}
       >
         <View style={styles.container}>
-          <StartGameScreen />
+          {activeScreen}
           <StatusBar style="auto" />
         </View>
       </ImageBackground>
-
-      {/* Komponen StartGameScreen ditempatkan di luar ImageBackground */}
     </LinearGradient>
   );
 }
