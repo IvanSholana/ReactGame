@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import ButtonContainer from "../components/primary-button";
 import Colors from "../utility/colors";
-import { useEffect, useState } from "react";
 
 let minNumber = 0;
 let maxNumber = 100;
@@ -12,30 +12,29 @@ export default function GameScreen({ userNumber }) {
   );
 
   const LowerCheck = () => {
-    if (enteredNumber > userNumber) {
-      Alert.alert("WARNING", "don't lie", [
-        { text: "exit", style: "cancel", onPress: UpperCheck() },
+    if (enteredNumber < userNumber) {
+      Alert.alert("WARNING", "Don't lie", [
+        { text: "Exit", style: "cancel", onPress: UpperCheck },
       ]);
-      return;
     } else {
       maxNumber = enteredNumber - 1;
       setEnteredNumber(parseInt(generateRandomNumber(minNumber, maxNumber)));
     }
   };
 
-  function UpperCheck() {
-    if (enteredNumber < userNumber) {
-      Alert.alert("WARNING", "don't lie", [
-        { text: "exit", style: "cancel", onPress: UpperCheck() },
+  const UpperCheck = () => {
+    if (enteredNumber > userNumber) {
+      Alert.alert("WARNING", "Don't lie", [
+        { text: "Exit", style: "cancel", onPress: LowerCheck },
       ]);
-      return;
     } else {
       minNumber = enteredNumber + 1;
       setEnteredNumber(parseInt(generateRandomNumber(minNumber, maxNumber)));
     }
-  }
-  function generateRandomNumber(maxNumber, minNumber) {
-    const randomNum = Math.floor(Math.random() * maxNumber) + minNumber;
+  };
+
+  function generateRandomNumber(min, max) {
+    const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
     return randomNum.toString();
   }
 
@@ -43,7 +42,7 @@ export default function GameScreen({ userNumber }) {
     if (enteredNumber === userNumber) {
       console.log("WIN");
     }
-  }, [enteredNumber]);
+  }, [enteredNumber, userNumber]);
 
   return (
     <View style={styles.container}>
@@ -53,7 +52,7 @@ export default function GameScreen({ userNumber }) {
         value={enteredNumber.toString()}
         maxLength={2}
         editable={false}
-      ></TextInput>
+      />
 
       <View style={styles.buttonContainer}>
         <ButtonContainer onPress={UpperCheck}>+</ButtonContainer>

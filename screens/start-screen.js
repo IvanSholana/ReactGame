@@ -19,7 +19,7 @@ export default function StartGameScreen({ startGame, getUserNumber }) {
       startGame(true);
     } else {
       Alert.alert("INVALID INPUT", "Please Insert Valid Input", [
-        { text: "Exit", style: "destructive", onPress: resetNumber() },
+        { text: "Exit", style: "destructive", onPress: resetNumber },
       ]);
     }
   };
