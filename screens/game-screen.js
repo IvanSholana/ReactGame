@@ -6,12 +6,13 @@ import Colors from "../utility/colors";
 let minNumber = 0;
 let maxNumber = 100;
 
-export default function GameScreen({ userNumber }) {
+export default function GameScreen({ userNumber, gameOver }) {
   const [enteredNumber, setEnteredNumber] = useState(
     generateRandomNumber(minNumber, maxNumber)
   );
 
   const LowerCheck = () => {
+    gameOver("opponentsGuest");
     if (enteredNumber < userNumber) {
       Alert.alert("WARNING", "Don't lie", [
         { text: "Exit", style: "cancel", onPress: UpperCheck },
@@ -23,6 +24,7 @@ export default function GameScreen({ userNumber }) {
   };
 
   const UpperCheck = () => {
+    gameOver("opponentsGuest");
     if (enteredNumber > userNumber) {
       Alert.alert("WARNING", "Don't lie", [
         { text: "Exit", style: "cancel", onPress: LowerCheck },
@@ -40,7 +42,7 @@ export default function GameScreen({ userNumber }) {
 
   useEffect(() => {
     if (enteredNumber === userNumber) {
-      console.log("WIN");
+      gameOver("status");
     }
   }, [enteredNumber, userNumber]);
 
