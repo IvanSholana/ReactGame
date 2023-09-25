@@ -36,6 +36,7 @@ export default function StartGameScreen({ startGame, getUserNumber }) {
         onChangeText={enterdNumberHandler}
         value={enterdNumber}
         maxLength={2}
+        keyboardType="number-pad"
       ></TextInput>
 
       <View style={styles.buttonContainer}>
