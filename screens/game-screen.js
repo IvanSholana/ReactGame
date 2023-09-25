@@ -19,6 +19,7 @@ export default function GameScreen({ userNumber, gameOver }) {
       ]);
     } else {
       maxNumber = enteredNumber - 1;
+      console.log(minNumber, maxNumber);
       setEnteredNumber(parseInt(generateRandomNumber(minNumber, maxNumber)));
     }
   };
@@ -31,6 +32,7 @@ export default function GameScreen({ userNumber, gameOver }) {
       ]);
     } else {
       minNumber = enteredNumber + 1;
+      console.log(minNumber, maxNumber);
       setEnteredNumber(parseInt(generateRandomNumber(minNumber, maxNumber)));
     }
   };
@@ -57,14 +59,19 @@ export default function GameScreen({ userNumber, gameOver }) {
       />
 
       <View style={styles.buttonContainer}>
-        <ButtonContainer onPress={UpperCheck}>+</ButtonContainer>
-        <ButtonContainer onPress={LowerCheck}>-</ButtonContainer>
+        <ButtonContainer addedStyle={styles.buttonStyle} onPress={UpperCheck}>
+          +
+        </ButtonContainer>
+        <ButtonContainer addedStyle={styles.buttonStyle} onPress={LowerCheck}>
+          -
+        </ButtonContainer>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  buttonStyle: { width: "40%" },
   title: {
     marginTop: 20,
     color: "white",

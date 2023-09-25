@@ -29,6 +29,12 @@ export default function App() {
     }
   }
 
+  function RestartGame() {
+    setGameStart(false);
+    setUserNumber();
+    setIsWin({ status: false, opponetsGuest: 0 });
+  }
+
   return (
     <LinearGradient
       colors={[Colors["burnt-sienna"], Colors["warm-yellow"]]}
@@ -48,7 +54,11 @@ export default function App() {
               getUserNumber={setUserNumber}
             />
           ) : (
-            <GameOverScreen />
+            <GameOverScreen
+              poin={isWin.opponetsGuest}
+              userNumber={userNumber}
+              restartGame={RestartGame}
+            />
           )}
           <StatusBar style="auto" />
         </View>

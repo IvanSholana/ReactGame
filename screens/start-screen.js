@@ -39,8 +39,15 @@ export default function StartGameScreen({ startGame, getUserNumber }) {
       ></TextInput>
 
       <View style={styles.buttonContainer}>
-        <ButtonContainer onPress={validationNumber}>START</ButtonContainer>
-        <ButtonContainer onPress={resetNumber}>RESET</ButtonContainer>
+        <ButtonContainer
+          addedStyle={styles.buttonStyle}
+          onPress={validationNumber}
+        >
+          START
+        </ButtonContainer>
+        <ButtonContainer addedStyle={styles.buttonStyle} onPress={resetNumber}>
+          RESET
+        </ButtonContainer>
       </View>
     </View>
   );
@@ -80,4 +87,5 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-around",
   },
+  buttonStyle: { width: "40%" },
 });

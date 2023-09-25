@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import Colors from "../utility/colors";
 import ButtonContainer from "../components/primary-button";
 
-export default function GameOverScreen() {
+export default function GameOverScreen({ poin, userNumber, restartGame }) {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -19,16 +19,16 @@ export default function GameOverScreen() {
           Your phone needed
           <Text style={{ fontWeight: "bold", color: Colors["deep-maroon"] }}>
             {" "}
-            X{" "}
+            {poin}
           </Text>{" "}
           rounds to guess the number
           <Text style={{ fontWeight: "bold", color: Colors["deep-maroon"] }}>
             {" "}
-            Y{" "}
+            {userNumber}{" "}
           </Text>
         </Text>
       </View>
-      <ButtonContainer addedStyle={styles.buttonTryAgain}>
+      <ButtonContainer onPress={restartGame} addedStyle={styles.buttonTryAgain}>
         TRY AGAIN
       </ButtonContainer>
     </View>
@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   containerImage: {
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 10 },
+    shadowRadius: 10,
     marginHorizontal: 50,
     marginBottom: 20,
     marginTop: 40,
